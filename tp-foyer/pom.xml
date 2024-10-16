@@ -14,8 +14,10 @@
     <name>tp-foyer</name>
     <description>tp-foyer</description>
     <properties>
-        <java.version>17</java.version>
-    </properties>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+</properties>
+
     <dependencies>
 
         <dependency>
