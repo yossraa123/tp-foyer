@@ -4,8 +4,8 @@ services:
    image: mysql:5.7
    restart: unless-stopped
    environment:
-         - MYSQL_ROOT_PASSIVORD=212JFT8280
-         - MYSQL_DATABASE= timesheet_db
+         - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+         - MYSQL_DATABASE= db
    ports:
          - 3306:3506
    volumes:
@@ -13,15 +13,15 @@ services:
   app-timesheet:
     depends_on:
       - mysqLdb
-    image: mayssasmeti/tpfoyer
+    image: mayssasmeti/app
     restart: on-failure
     ports:
-      - 8082:8082
+      - 8089:8089
     environment:
       SPRING_APPLICATION_JSON: '{
-      "spring.datasource.url" : "jdbc:mysql://localhost:3306/TpFoyer",
+      "spring.datasource.url" : "jdbc:mysql://localhost:3306/db?createDatabaseIfNotExist=true",
       "spring. datasource. username" : "root",
-      "spring.datasource.password" : 212JFT8280,
+      "spring.datasource.password" : ,
       "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
       "spring-jpa.hibernate.ddl-auto" : "update" }'
     stdin_open: true
