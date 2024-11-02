@@ -7,7 +7,7 @@ WORKDIR /app
 COPY tp-foyer-5.0.0.jar app.jar
 
 # Exposer le port sur lequel l'application écoute
-EXPOSE 8080
+EXPOSE 8089
 
 # Commande pour exécuter l'application
 CMD ["java", "-jar", "app.jar"]
