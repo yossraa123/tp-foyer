@@ -12,7 +12,7 @@ services:
      - db:/var/lib/mysql
   app:
     depends_on:
-      - mysqLdb
+      - mysqldb
     image: mayssasmeti/app
     restart: on-failure
     ports:
