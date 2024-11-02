@@ -5,7 +5,7 @@ FROM openjdk:11-jre-slim
 WORKDIR /app
 
 # Copier le fichier JAR dans l'image
-COPY tpfoyer-5.0.0.jar app.jar
+COPY tp-foyer-5.0.0.jar app.jar
 
 # Exposer le port sur lequel l'application écoute
 EXPOSE 8080
