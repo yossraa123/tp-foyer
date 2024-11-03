@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  mysqldb:
+   image: mysql:5.7
+   restart: unless-stopped
+   environment:
+         - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+         - MYSQL_DATABASE=db
+   ports:
+         - 3306:3506
+   volumes:
+     - db:/var/lib/mysql
+  app:
+    depends_on:
+      - mysqldb
+    image: yosra040120/app:5.0.0
+    restart: on-failure
+    ports:
+      - 8082:8082
+    environment:
+      SPRING_APPLICATION_JSON: '{
+      "spring.datasource.url" : "jdbc:mysql://mysqldb:3306/db?createDatabaseIfNotExist=true",
+      "spring. datasource. username" : "root",
+      "spring.datasource.password" : null,
+      "spring.jpa.show-sql" : "true",
+      "spring-jpa.hibernate.ddl-auto" : "update" }'
+    stdin_open: true
+    tty: true
+volumes:
+  db:
