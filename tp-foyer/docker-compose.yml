@@ -13,7 +13,7 @@ services:
   app:
     depends_on:
       - mysqldb
-    image: yosra040120/djmalyosra-5DS5-G3
+    image: yosra040120/djmalyosra-5ds5-g3
     restart: on-failure
     ports:
       - 8082:8082
