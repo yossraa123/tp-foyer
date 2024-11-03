@@ -4,10 +4,10 @@ services:
     image: mysql:5.7
     restart: unless-stopped
     environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_ROOT_PASSWORD=
       - MYSQL_DATABASE=db
     ports:
-      - 3506:3306  # Notez l'ordre des ports pour éviter la confusion
+      - 3306:3306  # Notez l'ordre des ports pour éviter la confusion
     volumes:
       - db:/var/lib/mysql
 
@@ -23,7 +23,7 @@ services:
         "spring.datasource.url" : "jdbc:mysql://mysqldb:3306/db?createDatabaseIfNotExist=true",
         "spring.datasource.username" : "root",
         "spring.datasource.password" : null,
-        "spring.jpa.show-sql" : "true",
+        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQL5InnoDBDialect",
         "spring.jpa.hibernate.ddl-auto" : "update"
       }'
     stdin_open: true
