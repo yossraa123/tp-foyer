@@ -13,7 +13,7 @@ services:
   app:
     depends_on:
       - mysqldb
-    image: mayssasmeti/app:5.0.0
+    image: yosra040120/app:5.0.0
     restart: on-failure
     ports:
       - 8082:8082
