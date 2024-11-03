@@ -1,5 +1,5 @@
 # Utilise l'image OpenJDK 11 depuis Docker Hub
-FROM openjdk:8-jdk-alpine
+FROM openjdk:17-jdk-alpine
 
 # Expose le port de l'application Spring Boot
 EXPOSE 8082
