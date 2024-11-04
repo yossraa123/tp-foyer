@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    tools{
+        maven 'M2_HOME'
+    }
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Maven') {
+            steps {
+                sh "mvn -version"
+            }
+        }
+        stage('Git') {
+            steps {
+                git branch: 'sami-sellami',
+                url:'https://github.com/yossraa123/tp-foyer.git'
+                
+            }
+        }
+    }
+}
