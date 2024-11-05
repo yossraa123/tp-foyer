@@ -10,7 +10,7 @@ pipeline {
 
         stage('Test Docker Access') {
             agent {
-                docker { image 'docker:20.10.8' } // Choose a Docker version that fits your needs
+                docker { image 'docker:20.10.8' } // Use a Docker image for this stage
             }
             steps {
                 sh "docker --version"
