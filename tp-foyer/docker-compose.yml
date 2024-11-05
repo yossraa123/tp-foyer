@@ -14,7 +14,7 @@ services:
   app:
     depends_on:
       - mysqldb
-    image: samisellami/app:6.0.0  # Ajoutez le tag ici
+    image: sami99/alpine:6.0.0  # Ajoutez le tag ici
     restart: on-failure
     ports:
       - 8082:8082
