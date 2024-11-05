@@ -14,7 +14,7 @@ services:
   app:
     depends_on:
       - mysqldb
-    image: yosra040120/djmalyosra-5ds5-g3:1.0.0  # Ajoutez le tag ici
+    image: samisellami/app:6.0.0  # Ajoutez le tag ici
     restart: on-failure
     ports:
       - 8082:8082
