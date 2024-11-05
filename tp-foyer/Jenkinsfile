@@ -1,24 +1,19 @@
 pipeline {
     agent any
-    tools{
-        maven 'M2_HOME'
-    }
+
     stages {
-        stage('Hello') {
+        stage('GIT') {
             steps {
-                echo 'Hello World'
+                git branch: 'sami-sellami', url: 'https://github.com/yossraa123/tp-foyer.git', credentialsId: 'github-creds'
             }
         }
-        stage('Maven') {
-            steps {
-                sh "mvn -version"
+
+        stage('Test Docker Access') {
+            agent {
+                docker { image 'docker:20.10.8' } // Choose a Docker version that fits your needs
             }
-        }
-        stage('Git') {
             steps {
-                git branch: 'sami-sellami',
-                url:'https://github.com/yossraa123/tp-foyer.git'
-                
+                sh "docker --version"
             }
         }
     }
