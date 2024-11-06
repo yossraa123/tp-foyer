@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('GIT') {
             steps {
-                git branch: 'sami-sellami', url: 'https://github.com/yossraa123/tp-foyer.git', credentialsId: 'github-creds'
+                git branch: 'sami-sellamihrehe', url: 'https://github.com/yossraa123/tp-foyer.git', credentialsId: 'github-creds'
             }
         }
 
