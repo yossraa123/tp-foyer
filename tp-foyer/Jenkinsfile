@@ -2,18 +2,87 @@ pipeline {
     agent any
 
     stages {
+        
         stage('GIT') {
             steps {
                 git branch: 'sami-sellami', url: 'https://github.com/yossraa123/tp-foyer.git', credentialsId: 'github-creds'
             }
         }
+        
+        stage('Maven Build') {
+            steps {
+                dir('tp-foyer') {
+                    sh "mvn clean compile"
+                }
+            }
+        }
+        
+        stage('Maven Jar') {
+            steps {
+                dir('tp-foyer') {
+                    sh "mvn clean package"
+                }
+            }
+        }
+        
+        stage('SONARQUBE') {
+            steps {
+                dir('tp-foyer') {
+                    sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=SamiSami2531*"
+                }
+            }
+        }
 
         stage('Test Docker Access') {
-            agent {
-                docker { image 'docker:20.10.8' } // Use a Docker image for this stage
-            }
             steps {
                 sh "docker --version"
+            }
+        }
+        
+        stage('recursive_ls') {
+            steps {
+                dir('tp-foyer') {
+                    sh "ls -lR"
+                }
+            }
+        }  // <-- Missing closing brace for the recursive_ls stage, added here
+        
+        stage('Building image') {
+            steps {
+                dir('tp-foyer'){
+                sh "docker build -t sami99/alpine:6.0.0 ."
+                }
+            }
+        }
+        
+        stage('Deploy image') {
+            steps {
+                dir('tp-foyer') {
+                    sh "docker login -u sami99 -p dckr_pat_wNp1lV9pQQccKUmIisK9U73tqZI"
+                    sh "docker push sami99/alpine:6.0.0"
+                }
+            }
+        }
+        
+        stage('Docker-compose') {
+            steps {
+                dir('tp-foyer') {
+                    sh "docker compose up -d"
+                }
+            }
+        }
+        stage('Prometheus') {
+            steps {
+                script {
+                    sh "docker start prometheus"
+                }
+            }
+        }
+        stage('Grafana') {
+            steps {
+                script {
+                    sh "docker start grafana"
+                }
             }
         }
     }
