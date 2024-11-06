@@ -1,19 +1,19 @@
-version: "3.8"
-services:
-  mysqldb:
+version: "3.8"  #version du docker compose 
+services:   # les conteneurs eli bechh namloulhom configuration 
+  mysqldb: # service sql MySQL avec la version 5.7
    image: mysql:5.7
-   restart: unless-stopped
+   restart: unless-stopped #l'image relance automatiquement 
    environment:
-         - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-         - MYSQL_DATABASE=db
+         - MYSQL_ALLOW_EMPTY_PASSWORD=yes #pas de mot de passe 
+         - MYSQL_DATABASE=db  #nom de databasee 
    ports:
-         - 3306:3506
+         - 3306:3506 #3306 machine hot o 3506 port mtaa conteneur mtaa sql 
    volumes:
-     - db:/var/lib/mysql
+     - db:/var/lib/mysql # volume espace de stockage des fichier par defaut 
   app:
-    depends_on:
+    depends_on:   # app nom de l'application qui depend de mysql 
       - mysqldb
-    image: mayssasmeti/app:5.0.0
+    image: mayssasmeti/app:5.0.0 # nom de l'image fe dockeHub 
     restart: on-failure
     ports:
       - 8089:8089
@@ -24,7 +24,7 @@ services:
       "spring.datasource.password" : null,
       "spring.jpa.show-sql" : "true",
       "spring-jpa.hibernate.ddl-auto" : "update" }'
-    stdin_open: true
-    tty: true
+    stdin_open: true #Gardent le terminal du conteneur ouvert, utiles pour les débogages interactifs.
+    tty: true 
 volumes:
   db:
